@@ -49,6 +49,8 @@ Open `http://localhost:5173`. The frontend proxies `/api` to the local backend.
 
 Auto Ontology is not bundled or started automatically. Its ingestion pipeline may inspect schema metadata and sample values; use only data you are permitted to process. Set `AUTO_ONTOLOGY_URL` to an independently deployed instance once it is available. The adapter intentionally has no credentials in this repository.
 
+`GET /api/integration` reports whether the application is running solely on its included local semantic adapter or has been configured for an external semantic service. The UI never receives a semantic-service credential.
+
 ## Repository layout
 
 - `backend/` FastAPI service and local semantic adapter

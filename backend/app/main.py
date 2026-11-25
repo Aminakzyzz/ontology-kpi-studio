@@ -9,6 +9,8 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
+from app.auto_ontology import integration
+
 ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = ROOT / "data"
 DB_PATH = DATA_DIR / "studio.db"
@@ -122,6 +124,12 @@ def health() -> dict[str, str]:
 @app.get("/api/ontology")
 def ontology() -> dict[str, Any]:
     return yaml.safe_load(ONTOLOGY_PATH.read_text())
+
+
+@app.get("/api/integration")
+def integration_status() -> dict[str, str | bool | None]:
+    """Report the semantic-provider mode without revealing credentials."""
+    return integration.status()
 
 
 @app.post("/api/ask")
