@@ -1,0 +1,27 @@
+domain: Operations analytics
+version: 0.1.0
+concepts:
+  - id: delivery
+    label: Delivery
+    description: A fulfilled customer shipment with a planned and actual delivery date.
+    source: deliveries
+  - id: on_time_delivery_rate
+    label: On-time delivery rate
+    description: Percentage of deliveries whose actual delivery date is on or before the planned date.
+    metric: "100 * count(status = on_time) / count(delivery_id)"
+  - id: revenue
+    label: Revenue
+    description: Revenue recorded for a completed delivery in euros.
+    source: deliveries.revenue_eur
+  - id: customer_region
+    label: Customer region
+    description: Commercial region associated with a customer.
+    source: customers.region
+relationships:
+  - from: delivery
+    to: customer_region
+    type: belongs_to
+  - from: delivery
+    to: revenue
+    type: generates
+
